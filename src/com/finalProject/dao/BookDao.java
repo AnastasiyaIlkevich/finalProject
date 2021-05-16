@@ -1,8 +1,7 @@
 package com.finalProject.dao;
 
-import com.finalProject.model.Author;
 import com.finalProject.model.Book;
-import com.finalProject.util.DBUtils;
+import com.finalProject.util.DataSourceUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,11 +10,11 @@ import java.util.List;
 public class BookDao {
 
 
-    private DBUtils dbUtils = new DBUtils();
+    private DataSourceUtil dataSourceUtil = new DataSourceUtil();
 
     //вывод всех книг.
     public List<Book> getAllBooks() throws SQLException {
-        Connection connection = dbUtils.getConnection();//соединение с базой данных
+        Connection connection = dataSourceUtil.getConnection();//соединение с базой данных
         Statement statement = connection.createStatement();//посыльный в базу
         ResultSet resultSet = statement.executeQuery("select books.id, books.title," +
                 " books.ISBN, authors.name, " +
@@ -27,10 +26,10 @@ public class BookDao {
 
     }
 
-    //10 метод достать книгу  по id
+    // метод достать книгу  по id
     public Book getBookById(Long id) throws SQLException {
 
-        Connection connection = dbUtils.getConnection();//соединение с базой данных
+        Connection connection = dataSourceUtil.getConnection();//соединение с базой данных
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "select books.id, books.title," +
                         " books.ISBN, authors.name, " +
@@ -55,7 +54,7 @@ public class BookDao {
             book.setGenre(resultSet.getString(5));// изменила Genre на String...
             books.add(book);
         }
-        dbUtils.CloseConnection(connection);//закрываем соединение
+        dataSourceUtil.CloseConnection(connection);//закрываем соединение
 
         return books;
     }
@@ -96,43 +95,12 @@ public class BookDao {
 
 
     //удаление книги по ид
-
-    public void delete(Book book) throws SQLException {
-        Connection connection = dbUtils.getConnection();
-       PreparedStatement preparedStatement = connection.prepareStatement(
-               "DELETE FROM books WHERE id = ?");
-//        PreparedStatement preparedStatement = connection.prepareStatement(
-////                "DELETE FROM books.id, books.title," +
-////                        " books.ISBN, authors.name, " +
-////                        "genres.name from books, genres, authors " +
-////                        "where books.genreID = genres.id " +
-////                        "and books.authorId = authors.id " +
-////                        "and books.id = ?");//посыльный в базу
-        preparedStatement.setLong(1,book.getId());
-        dbUtils.CloseConnection(connection);//закрываем соединение
-        System.out.println("книга удалена успешно");
-
-
+    public void delete(Long id) throws SQLException {//нужна проверка есть ли книга с таким ID
+        Connection connection = dataSourceUtil.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM books WHERE id = ?");
+        preparedStatement.setLong(1, id);
+        preparedStatement.executeUpdate();
+        dataSourceUtil.CloseConnection(connection);//закрываем соединение
+        System.out.println("Книга удалена.");
     }
-
-//    public List<Book> delete(int id) throws SQLException {
-//        Connection connection = dbUtils.getConnection();
-//        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM books WHERE id = ?");
-//       /* PreparedStatement preparedStatement = connection.prepareStatement(
-//                "DELETE FROM books.id, books.title," +
-//                        " books.ISBN, authors.name, " +
-//                        "genres.name from books, genres, authors " +
-//                        "where books.genreID = genres.id " +
-//                        "and books.authorId = authors.id " +
-//                        "and books.id = ?");//посыльный в базу*/
-//        preparedStatement.setLong(1, id);
-//        //dbUtils.CloseConnection(connection);//закрываем соединение
-//        ResultSet resultSet = preparedStatement.executeQuery("select books.id, books.title," +
-//                " books.ISBN, authors.name, " +
-//                "genres.name from books, genres, authors " +
-//                "where books.genreID = genres.id " +
-//                "and books.authorId = authors.id ");
-//        return createBook(resultSet, connection);
-//    }
-
 }

@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBUtils {
+public class DataSourceUtil {
 
-    //делает соеденение с базой данных
-    //видео 15 смотри 1-40
 
     // открываем соединение
     public Connection getConnection() {
@@ -35,4 +33,3 @@ public class DBUtils {
 
 
 }
-// в случае если не заработает, то посмотреть видео 1.33 установка старого драйвера

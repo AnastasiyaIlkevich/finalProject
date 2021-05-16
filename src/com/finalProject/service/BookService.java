@@ -17,13 +17,21 @@ public class BookService {
         return booksList;
     }
 
-    public Book fetchBookById(Long id){
+    public Book fetchBookById(Long id) {
         try {
             return bookDao.getBookById(id);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
+    }
+    public void deleteBook(Long id) {
+        try {
+            bookDao.delete(id);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
 }
