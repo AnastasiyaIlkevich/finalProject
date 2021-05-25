@@ -7,9 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class BookService {
 
     private BookDao bookDao = new BookDao();
+
 
     public List<Book> fetchAllBook() throws SQLException {
         List<Book> booksList = new ArrayList<>();
@@ -27,11 +30,39 @@ public class BookService {
     }
     public void deleteBook(Long id) {
         try {
-            bookDao.delete(id);
+            bookDao.deleteBook(id);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
     }
 
+    public Book correctionTitle(Long bookId, String newTitleBook) {
+
+        try {
+            return     bookDao.correctionBookTitle(bookId, newTitleBook );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+         return null;// не придумала как обработать если команда не правильная...
+    }
+
+    public Book correctionAuthor() {
+        return null;
+    }
+
+    public Book correctionGenre(Long  bookId ) {
+
+
+        try {
+            return     bookDao.correctionBookGenre(  bookId );
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return null;// не придумала как обработать если команда не правильная...
+    }
 }
+
+
+

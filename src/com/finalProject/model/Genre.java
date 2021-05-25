@@ -5,20 +5,26 @@ public class Genre {
     Long id;
     String name;
 
+    public Genre(Long id) {
+        this.id = id;
+    }
+
+    public Genre() {
+
+    }
+
     @Override
     public String toString() {
-        return "Genre{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "'" + name + '\'';
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public long setId(Long id) {
         this.id = id;
+        return 0;
     }
 
     public String getName() {
