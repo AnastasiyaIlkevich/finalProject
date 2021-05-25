@@ -5,12 +5,17 @@ public class Author {
    private Long id;
    private String name;
 
+   public Author(Long id) {
+      this.id = id;
+   }
+
+   public Author() {
+
+   }
+
    @Override
    public String toString() {
-      return "Author{" +
-              "id=" + id +
-              ", name='" + name + '\'' +
-              '}';
+      return "'" + name + '\'';
    }
 
    public Long getId() {

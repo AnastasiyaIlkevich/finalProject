@@ -3,6 +3,7 @@ package com.finalProject.dao;
 import com.finalProject.application.Application;
 import com.finalProject.service.ApplicationService;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class ApplicationDao {
@@ -23,7 +24,7 @@ public class ApplicationDao {
         if (command == 1) {
             try {
                 application.startProgram();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException | SQLException e) {
                 e.printStackTrace();
             }
         } else if (command == 2){

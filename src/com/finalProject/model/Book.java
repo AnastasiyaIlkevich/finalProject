@@ -5,17 +5,28 @@ public class Book {
     private Long id;
     private String title;
     private String IBSN;// код для продажи
-    private String author;
-    private String genre;
+    private Author author;
+    private Genre genre;
+
+    public Book(String title, String IBSN, Author author, Genre genre) {
+        this.title = title;
+        this.IBSN = IBSN;
+        this.author = author;
+        this.genre = genre;
+    }
+
+    public Book() {
+
+    }
 
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", IBSN='" + IBSN + '\'' +
-                ", author=" + author +
-                ", genre=" + genre +
+                "id --> " + id +
+                ", title --> '" + title + '\'' +
+                ", IBSN --> '" + IBSN + '\'' +
+                ", author --> " + author +
+                ", genre --> " + genre +
                 '}';
     }
 
@@ -27,6 +38,22 @@ public class Book {
         this.title = title;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
     public Long getId() {
         return id;
     }
@@ -35,21 +62,7 @@ public class Book {
         this.id = id;
     }
 
-    public String getAuthor() {
-        return author;
-    }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
 
     public String getIBSN() {
         return IBSN;
@@ -62,7 +75,5 @@ public class Book {
     public Book(Long id) {
         this.id = id;
     }
-    public Book() {
 
-    }
 }
